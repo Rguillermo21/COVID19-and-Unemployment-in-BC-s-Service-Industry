@@ -56,9 +56,7 @@ hospitality <- read.csv('2021Tourism_Hospitality.csv') %>%
 
 
 hospitality$N = as.numeric(str_replace_all(hospitality$N, pattern = fixed(","), replacement = ""))
-
 hospitality$Total = as.numeric(str_replace_all(hospitality$Total, pattern = fixed(","), replacement = ""))
-
 names(hospitality)[1] <- paste("Region")
 
 hospitality <-  hospitality %>%
@@ -105,7 +103,6 @@ hosp_gender_dist2 <- hospitality %>%
 
 
 # By age in total industry ----
-
 hospitality2 <- read.csv('2021Tourism_Hospitality2.csv') %>%
   gather(key = age, value = "N", 3:8) 
 
@@ -123,13 +120,11 @@ hospitality2 <- hospitality2 %>%
 
 names(hospitality2)[1] <- paste("Region")
 
-
 hospitality2 %>%
   filter(sector %in% "Accommodation") %>%
   summarize(n = percent)
 
 # Hospitality Age Plot
-
 hosp_age_plot <- ggplot(hospitality2, aes(x = sector, y = percent, fill = fct_rev(age))) +
   geom_col(position = "stack", width = 0.5) +
   scale_fill_brewer() +
@@ -146,7 +141,6 @@ hosp_age_plot <- ggplot(hospitality2, aes(x = sector, y = percent, fill = fct_re
        subtitle = "Workforce composition by age in sectors of hospitality industry, %")
 
 # Hospitality Industry by Education ----
-
 hospitality3 <- read.csv('2021Tourism_Hospitality3.csv')
 
 hospitality3$Below.High.School <- as.numeric(gsub(",","", hospitality3$Below.High.School))
@@ -170,7 +164,6 @@ hospitality3 <- hospitality3 %>%
                               "Bachelor.s.degree.or.Above" = "Bachelors Degree or Above"))
 
 names(hospitality3)[1] <- paste("Region")
-
 
 hosp_edu_plot <- ggplot(hospitality3, aes(x = `edu level`, y = percent)) +
   geom_col(width = 0.5, fill="#315B94") +
@@ -197,12 +190,9 @@ hosp_nemp <- read_csv("bc_tourism_employment_2017-2022.csv") %>%
 cerb <- read.csv("CERB.csv") 
   
 cerb <- data.frame(t(cerb)) # Transpose the dataset to get our variables
-
 names(cerb) <- cerb[1,] # Make first row the variable names
-
 cerb <- cerb[-1,] %>% #[row, column]
   filter(!Age %in% "15 and over") # Remove observations in 'Age' variable that refer to 15 and over | Redundant obs messing with plots
-
 rownames(cerb) <- NULL # Remove row names
 
 # Stack the columns with gender to avoid faceting for age
@@ -275,8 +265,7 @@ cerb_ent_tsgraph <- ggplot(cerb_ent_ts, aes(x = Date, y = num, col = Age, shape 
 
 
 
-# CERB 5k ts graph
-
+# CERB 5k+ previous year timeseries graph
 cerb_5k_tsgraph <- ggplot(cerb_5k_ts, aes(x = Date, y = percent, col = Age, shape = Gender)) +
   geom_point() +
   geom_line() +
@@ -304,7 +293,6 @@ residplot1 <- ggplot(ent_lm, aes(x = .fitted, y = .resid)) +
 
 # Key Legislation Dates ----
 # Found this one Wikipedia
-
 key_dates <- data.frame(
   Date = as.Date(c("2020-03-16", "2020-03-16", "2020-03-20", "2020-03-21", "2020-05-19", "2020-06-24", "2020-10-19")),
   leg = c("Health officials ban all events with more than 50 people in an effort to curb the spread of COVID-19. The ban includes indoor and outdoor sporting events, conferences, meetings and religious gatherings. All bars and nightclubs are ordered to close",
@@ -335,7 +323,6 @@ news_covid_lda <- LDA(news_covid_dtm, k = 5, control = list(seed = 11037))
 news_covid_topics <- tidy(news_covid_lda, matrix = "beta")
 news_covid_topics
 
-
 tm_covid_graph <- news_covid_topics %>%
   mutate(term = reorder_within(term, beta, topic)) %>%
   group_by(topic) %>%
@@ -347,14 +334,14 @@ tm_covid_graph <- news_covid_topics %>%
 ##BETA (END)##
 
 
-
-# Shiny ----
+###########
+## Shiny ##
+###########
 
 header <- dashboardHeader(
   title = "COVID-19 Impacts on Hospitality and Tourism Industry", 
   titleWidth = 450
 )
-
 
 CSS <- "
           /* Makes the drop down list go upwards*/
@@ -578,7 +565,7 @@ server <- function(input, output, session){
       top_n(8, beta) %>% # Top 8 words and beta
       ggplot(aes(beta, term, fill = factor(topic))) +
       geom_col(show.legend = FALSE) +
-      facet_wrap(~ topic, scales = "free", ncol = 3) + # Kinda ugly but no choice
+      facet_wrap(~ topic, scales = "free", ncol = 3) + 
       scale_y_reordered()}) 
   
   output$covidnews_lda <- renderTable({terms(news_covid_lda, 5)})
@@ -739,11 +726,8 @@ server <- function(input, output, session){
     
     # Output plotly object
     ggplotly(g, tooltip = c("x", "y"))
-
-  })
+  }) 
   
-
-    
 }
 
 shinyApp(ui, server)
