@@ -186,8 +186,6 @@ hosp_edu_plot <- ggplot(hospitality3, aes(x = `edu level`, y = percent)) +
        title = "Tourism Sector by Highest\nEducation Level Attained",
        subtitle = "Workforce composition by education in tourism sector, %")
 
-# hosp_edu_plot
-
 # Hospitality Industry by # of Employees 2017-2022 ----
 hosp_nemp <- read_csv("bc_tourism_employment_2017-2022.csv") %>%
   gather("month", "sum", "Jan":"Dec") %>%
@@ -198,7 +196,6 @@ hosp_nemp <- read_csv("bc_tourism_employment_2017-2022.csv") %>%
 # CERB BC Estimate Cleaning ----
 cerb <- read.csv("CERB.csv") 
   
- 
 cerb <- data.frame(t(cerb)) # Transpose the dataset to get our variables
 
 names(cerb) <- cerb[1,] # Make first row the variable names
@@ -242,7 +239,6 @@ cerb_5k_ts$percent <- as.numeric(str_replace_all(cerb_5k_ts$percent, pattern = f
 cerb_5k_ts <- cerb_5k_ts %>%
   mutate(percent = percent/100)
 
-
 cerb_recip <- ggplot(cerb_5k_ts, aes(x = as.factor(Age), y = percent, fill = Gender)) + # Transform the data by logging so we can visualize better
   geom_col(width = 0.5) + # Style points 
   theme_ipsum(base_family = "", grid = FALSE, axis = "x + y") + # Maintain theme
@@ -257,13 +253,8 @@ cerb_recip <- ggplot(cerb_5k_ts, aes(x = as.factor(Age), y = percent, fill = Gen
   theme(legend.position = "top") +
   coord_flip() # Easier to see bar graphs this way
 
-
-cerb_recip
-
 # Time-Series Graphs of COVID-19 recipients and key legislation dates
 ent_lm <- lm(log(num) ~ Age + Gender, cerb_ent_ts)
-
-#summary(ent_lm)
 
 cerb_ent_tsgraph <- ggplot(cerb_ent_ts, aes(x = Date, y = num, col = Age, shape = Gender)) +
   geom_point() +
@@ -302,8 +293,6 @@ cerb_5k_tsgraph <- ggplot(cerb_5k_ts, aes(x = Date, y = percent, col = Age, shap
        subtitle = "BC  |  Earnings of $5,000+ in 2019") +
   theme(legend.position = "top")
 
-
-
 # Residual Plot
 residplot1 <- ggplot(ent_lm, aes(x = .fitted, y = .resid)) +
   geom_point() +
@@ -341,8 +330,6 @@ news_covid_dtm <- ndata %>%
   cast_dtm(textlabel, word, n)
 
 news_covid_lda <- LDA(news_covid_dtm, k = 5, control = list(seed = 11037))
-#summary(news_covid_lda)
-
 
 # the topic-word probability vector
 news_covid_topics <- tidy(news_covid_lda, matrix = "beta")
@@ -607,9 +594,7 @@ server <- function(input, output, session){
                                                     bInfo = FALSE, # Remove showing entries
                                                     columnDefs = list(list(className = 'dt-left', # Pad columns to left
                                                                            targets = 0:1)))) # Target columns (Only 1 col so 0:1)))
-  # CERB SUM filtering gender based on input
-                                                                            
-  
+  # CERB SUM filtering gender based on input                                                                       
   output$hosp_gender <- renderDT({hospitality %>%
       ungroup() %>%
       select("sector", "percentMale", "percentFemale", "Total")  %>%
