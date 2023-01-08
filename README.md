@@ -1,6 +1,6 @@
 # COVID19-and-Unemployment-in-BC's-Service-Industry
 
-This reposity corresponds to the SDA490 - Capstone project at Simon Fraser University in 2022.
+### This reposity corresponds to the SDA490 - Capstone project at Simon Fraser University in 2022.
 Contributors of this project include Ralph Guillermo, Mathias Gausachs, Lesley Urgel, Lovely Ranges
 
 
