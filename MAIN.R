@@ -53,8 +53,6 @@ hospitality <- read.csv('2021Tourism_Hospitality.csv') %>%
          sector = factor(sector, levels = c("Accommodation", "FoodBeverage", "RecreationEnter", "Tourism", "Transportation & Travel"))) %>%
   ungroup()
 
-
-
 hospitality$N = as.numeric(str_replace_all(hospitality$N, pattern = fixed(","), replacement = ""))
 hospitality$Total = as.numeric(str_replace_all(hospitality$Total, pattern = fixed(","), replacement = ""))
 names(hospitality)[1] <- paste("Region")
@@ -66,7 +64,6 @@ hospitality <-  hospitality %>%
 hospitality %>%
   filter(gender %in% "Male") %>%
   summarize(n = percent)
-
 
 hospitality_plot <- ggplot(hospitality, aes(x = sector, y = percent, fill = gender)) +
   geom_col(position = "dodge", width=0.55) +
@@ -101,11 +98,9 @@ hosp_gender_dist2 <- hospitality %>%
   mutate(mean = mean(percent)) %>%
   summarize(mean = min(mean))
 
-
 # By age in total industry ----
 hospitality2 <- read.csv('2021Tourism_Hospitality2.csv') %>%
   gather(key = age, value = "N", 3:8) 
-
 
 # Clean strings in age variable
 hospitality2$N <- as.numeric(str_replace_all(hospitality2$N, pattern = fixed(","), replacement = ""))
