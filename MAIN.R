@@ -45,7 +45,6 @@ library("dashboardthemes")
 library("reshape")
 library("DT")
 
-
 # Hospitality data ----
 # By gender in total industry
 hospitality <- read.csv('2021Tourism_Hospitality.csv') %>%
@@ -87,12 +86,6 @@ hospitality_plot <- ggplot(hospitality, aes(x = sector, y = percent, fill = gend
        title = "Hospitality Industry by Gender",
        subtitle = "Workforce composition by gender in sectors of hospitality industry, %")
 
-
-
-hospitality_plot
-
-#hospitality_plot
-
 # Distribution of genders in hospitality industry overall
 hosp_gender_dist <- hospitality %>%
   group_by(gender) %>%
@@ -110,9 +103,6 @@ hosp_gender_dist2 <- hospitality %>%
   mutate(mean = mean(percent)) %>%
   summarize(mean = min(mean))
 
-
-
-#str(hosp_gender_dist)
 
 # By age in total industry ----
 
@@ -154,8 +144,6 @@ hosp_age_plot <- ggplot(hospitality2, aes(x = sector, y = percent, fill = fct_re
        y = "",
        title = "Hospitality Industry by Age",
        subtitle = "Workforce composition by age in sectors of hospitality industry, %")
-
-hosp_age_plot
 
 # Hospitality Industry by Education ----
 
@@ -273,8 +261,6 @@ cerb_recip <- ggplot(cerb_5k_ts, aes(x = as.factor(Age), y = percent, fill = Gen
 cerb_recip
 
 # Time-Series Graphs of COVID-19 recipients and key legislation dates
-
-
 ent_lm <- lm(log(num) ~ Age + Gender, cerb_ent_ts)
 
 #summary(ent_lm)
@@ -327,10 +313,6 @@ residplot1 <- ggplot(ent_lm, aes(x = .fitted, y = .resid)) +
        title = "Residuals versus Fitted"
        )
 
-# residplot1
-
-
-
 # Key Legislation Dates ----
 # Found this one Wikipedia
 
@@ -350,10 +332,6 @@ key_dates <- data.frame(
 data <- read_csv("Hospitality.csv")
 ndata <- data[which(data$textlabel <= 30), ]
 
-
-# A bunch of packages for text mining/ Word cloud stuff
-
-
 # Create a document-term-matrix
 news_covid_dtm <- ndata %>%
   unnest_tokens(word, text, token = "regex", pattern = "\\s+|[[:punct:]]+") %>% 
@@ -362,17 +340,8 @@ news_covid_dtm <- ndata %>%
   count(textlabel, word) %>%
   cast_dtm(textlabel, word, n)
 
-# look at structure:
-#str(news_covid_dtm)
-
-# Estimate your LDA topic model!
-# set a seed so that the output of the model is predictable
-
 news_covid_lda <- LDA(news_covid_dtm, k = 5, control = list(seed = 11037))
 #summary(news_covid_lda)
-
-
-#topic-word probabilities 
 
 
 # the topic-word probability vector
@@ -388,12 +357,8 @@ tm_covid_graph <- news_covid_topics %>%
   geom_col(show.legend = FALSE) +
   facet_wrap(~ topic, scales = "free", ncol = 3) +
   scale_y_reordered()
-
-# tm_covid_graph
-
 ##BETA (END)##
 
-##GAMMA: word-topic association (figure out topic based on the most common words used) (START)##
 
 
 # Shiny ----
@@ -403,8 +368,6 @@ header <- dashboardHeader(
   titleWidth = 450
 )
 
-
-#setwd("C:/Users/Raffy/OneDrive/Documents/SDA490/Repository/SDA490")
 
 CSS <- "
           /* Makes the drop down list go upwards*/
