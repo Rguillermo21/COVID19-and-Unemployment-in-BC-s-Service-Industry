@@ -3,6 +3,7 @@
 ### This reposity corresponds to the SDA490 - Capstone project at Simon Fraser University in 2022.
 Contributors: Ralph Guillermo, Mathias Gausachs, Lesley Urgel, Lovely Ranges
 
+VIEW THE DASHBOARD: https://rguillermo.shinyapps.io/COVID19_SERVICE_INDUSTRY/
 
 Using time-series data on BC's service industry we were able to analyze key employment statistics and demographics. The variables included gender, sector, education, region, and date. Afterwards, we analyzed the correlations in increased unemployment with government policy responses toward the pandemic.
 
