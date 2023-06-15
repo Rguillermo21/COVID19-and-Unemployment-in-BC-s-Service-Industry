@@ -6,7 +6,7 @@ Contributors: Ralph Guillermo, Mathias Gausachs, Lesley Urgel, Lovely Ranges
 VIEW THE DASHBOARD: https://rguillermo.shinyapps.io/COVID19_SERVICE_INDUSTRY/
 
 
-**GOAL**
+## **GOAL**
 Using time-series data on BC's service industry we were able to analyze key employment statistics and demographics. The variables included gender, sector, education, region, and date. Afterward, we analyzed the correlations between increased unemployment with government policy responses toward the pandemic.
 
 Secondly, we use CERB data to examine if the increases in unemployment in the BC service industry contribute to increased participation in CERB. This is particularly important to observe because we should see a correlated increase at roughly similar times. Otherwise, CERB may not be performing its role in adequately aiding vulnerable groups during the lockdown, where their occupations require them to be on-site and the business being heavily reliant on the flow of people. 
