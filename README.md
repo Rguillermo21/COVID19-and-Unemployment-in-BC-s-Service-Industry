@@ -3,7 +3,8 @@
 ### This reposity corresponds to the SDA490 - Capstone project at Simon Fraser University in 2022.
 Contributors: Ralph Guillermo, Mathias Gausachs, Lesley Urgel, Lovely Ranges
 
-#### View the report and project website: https://rguillermo21.github.io/COVID19-and-Unemployment-in-BC-s-Service-Industry/
+#### View the report and project website: <br/>
+https://rguillermo21.github.io/COVID19-and-Unemployment-in-BC-s-Service-Industry/
 
 #### VIEW THE DASHBOARD: https://rguillermo.shinyapps.io/COVID19_SERVICE_INDUSTRY/
 
