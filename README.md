@@ -21,3 +21,9 @@ BC Service Industry Data:
 https://go2hr.ca/bc-tourism-and-hospitality-labour-market-information-employment-tracker
 
 We cannot include other datasets as they contain information that is proprietary and the licenses do not allow the contents for public viewing.
+
+
+
+The template used for the website is Massively by HTML5 UP. 
+html5up.net | @ajlkn
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
